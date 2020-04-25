@@ -1,5 +1,9 @@
 <style type="text/css">
-{{ $url := (print "img" "/" .Params.hero_image ) }}
+{{ .Scratch.Set "masthero" .Site.Params.hero_image }}
+{{ if isset .Params "hero_image" }}
+{{ 	.Scratch.Set "masthero" .Params.hero_image }}
+{{ end }}
+{{ $url := (print "img" "/" ( .Scratch.Get "masthero" ) ) }}
 .masthead-hero {
   background-image: url("{{ $url | absURL }}");
 }
